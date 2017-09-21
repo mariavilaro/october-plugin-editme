@@ -25,8 +25,8 @@ class EditMe extends ComponentBase
     {
         return [
             'message' => [
-                'title' => 'fw.editme::lang.component_editme.property_file.title',
-                'description' => 'fw.editme::lang.component_editme.property_file.description',
+                'title' => 'fw.editme::lang.component_editme.property_message.title',
+                'description' => 'fw.editme::lang.component_editme.property_message.description',
                 'default' => ''
             ]
         ];

@@ -8,9 +8,9 @@ return [
     'component_editme' => [
         'name' => 'EditMe Component',
         'description' => 'This component allows in-context editing.',
-        'property_file' => [
-            'title' => 'File',
-            'description' => 'Content block filename to edit, optional',
+        'property_message' => [
+            'title' => 'Message',
+            'description' => 'Translation string to show or edit',
         ],
     ]
 ];
