@@ -1,0 +1,24 @@
+{
+    "name": "fw/editable-plugin",
+    "type": "october-plugin",
+    "description": "Editable plugin for October CMS",
+    "keywords": ["october", "octobercms", "editme", "translate"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Maria Vilaró",
+            "email": "maria.vilaro@gmail.com"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/mariavilaro/editable-plugin"
+        }
+    ],
+    "require": {
+        "php": ">=7.0",
+        "composer/installers": "~1.0"
+    },
+    "minimum-stability": "dev"
+}
