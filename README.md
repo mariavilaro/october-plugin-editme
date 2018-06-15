@@ -2,9 +2,9 @@
 
 This plugin allows in-context editing (click to edit) features to the [OctoberCMS](http://octobercms.com) front-end.
 
-It needs Rainlab Translate plugin to work.
+It needs the Rainlab.Translate plugin to work.
 
-This plugin uses Rainlab Editable plugin code as a base but uses translate strings instead of content blocks.
+This plugin uses Rainlab.Editable plugin code as a base but uses translate strings instead of content blocks, so everything is saved in the database.
 
 The editor only allows plain text and line breaks.
 
@@ -37,10 +37,21 @@ This tag can be made editable by using the following instead:
 
     {% component 'editme' message='page.title' %}
 
+## Editing text fields in models
+
+From version 1.0.2 you can edit any model text fields. For example, if you are using Rainlab.Blog plugin you can do this in you blog post page:
+
+    {% component 'editme' message='title' model=post %}
+
+In this case the content will be loaded from the 'title' field in 'post'. And it will be saved in the same place. It also works in loops:
+
+    {% for post in posts %}
+        {% component 'editme' message='title' model=post %}
+    {% endfor %}
+
 ## Permissions
 
 Only administrator with the permission *Manage content* are able to edit content. Administrators must also be logged in to the back-end.
-
 
 ## Front-end JavaScript and StyleSheet
 

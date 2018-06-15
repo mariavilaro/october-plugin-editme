@@ -16,6 +16,9 @@
         this.originalHtml = null;
         this.requestHandler = this.$el.data('handler')
         this.editMessage = this.$el.data('message')
+        if (this.$el.data('model') && this.$el.data('id')) {
+            this.editModel = {'model': this.$el.data('model'), 'id': this.$el.data('id')}
+        }
 
         this.$controlPanel = $('<div />').addClass('control-editme')
         this.$edit = $('<button />').addClass('editme-edit-button').text('Edit').appendTo(this.$controlPanel)
@@ -62,7 +65,8 @@
         $.request(this.requestHandler, {
             data: {
                 message: this.editMessage,
-                content: html
+                content: html,
+                model: this.editModel
             }
         })
     }

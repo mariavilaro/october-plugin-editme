@@ -1,5 +1,5 @@
 {
-    "name": "fw/editable-plugin",
+    "name": "fw/editme",
     "type": "october-plugin",
     "description": "Editable plugin for October CMS",
     "keywords": ["october", "octobercms", "editme", "translate"],
@@ -13,7 +13,7 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/mariavilaro/editable-plugin"
+            "url": "https://github.com/mariavilaro/october-plugin-editme"
         }
     ],
     "require": {
