@@ -109,7 +109,7 @@ class EditMe extends ComponentBase
     public function checkEditor()
     {
         $backendUser = BackendAuth::getUser();
-        return $backendUser && ($backendUser->hasAccess('cms.manage_content') || $backendUser->hasAccess('rainlab.pages.manage_content'));
+        return $backendUser && ($backendUser->hasAccess('rainlab.translate.manage_messages'));
     }
 
 }
