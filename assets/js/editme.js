@@ -14,8 +14,12 @@
         this.$el       = $(element)
 
         this.originalHtml = null;
-        this.requestHandler = this.$el.data('handler')
-        this.editMessage = this.$el.data('message')
+        this.richEditor = null;
+        this.requestHandler = this.$el.data('handler');
+        this.editorType = this.$el.data('type');
+        this.uploadUrl = this.$el.data('upload-url');
+        this.csrfToken = this.$el.data('csrf-token');
+        this.editMessage = this.$el.data('message');
         if (this.$el.data('model') && this.$el.data('id')) {
             this.editModel = {'model': this.$el.data('model'), 'id': this.$el.data('id')}
         }
@@ -45,8 +49,16 @@
     }
 
     EditMe.prototype.clickCancel = function() {
-        this.$el.redactor('code.set', this.originalHtml)
-        this.$el.redactor('core.destroy')
+        if (this.editorType == 'richeditor') {
+            this.richEditor.data('oc.richEditor').setContent(this.originalHtml);
+            this.richEditor.data('oc.richEditor').dispose();
+            this.richEditor.find('>textarea:first').hide();
+            this.$el.find('>.rendered').show();
+        } else {
+            this.$el.redactor('code.set', this.originalHtml)
+            this.$el.redactor('core.destroy')
+            this.$el.html(this.originalHtml);
+        }
         this.refreshControlPanel()
         this.$controlPanel.removeClass('active')
         this.$edit.show()
@@ -55,8 +67,16 @@
     }
 
     EditMe.prototype.clickSave = function() {
-        var html = this.$el.redactor('code.get')
-        this.$el.redactor('core.destroy')
+        if (this.editorType == 'richeditor') {
+            var html =this.richEditor.data('oc.richEditor').getContent();
+            this.richEditor.data('oc.richEditor').dispose();
+            this.richEditor.find('>textarea:first').hide();
+            this.$el.find('>.rendered').html(html);
+            this.$el.find('>.rendered').show();
+        } else {
+            var html = this.$el.redactor('code.get')
+            this.$el.redactor('core.destroy')
+        }
         this.refreshControlPanel()
         this.$controlPanel.removeClass('active')
         this.$edit.show()
@@ -72,28 +92,43 @@
     }
 
     EditMe.prototype.clickEdit = function() {
-        this.$el.redactor({
-            focus: true,
-            toolbar: false,
-            paragraphize: false,
-            linebreaks: true
-        })
+        if (this.editorType == 'richeditor') {
+            this.originalHtml = this.$el.find('>.rendered').html();
 
-        this.refreshControlPanel()
-        this.$controlPanel.addClass('active')
-        this.$save.show()
-        this.$cancel.show()
-        this.$edit.hide()
-        this.originalHtml = this.$el.redactor('code.get')
+            this.richEditor = this.$el.find('>.editme-richeditor:first').richEditor();
+            this.richEditor.data('oc.richEditor').editor.opts.imageUploadURL = this.uploadUrl;
+            this.richEditor.data('oc.richEditor').editor.opts.imageUploadParams = {
+                X_OCTOBER_MEDIA_MANAGER_QUICK_UPLOAD: 1,
+                _token: this.csrfToken
+            };
+
+            this.$el.find('>.rendered').hide();
+        } else {
+            this.originalHtml = this.$el.html();
+
+            this.$el.redactor({
+                focus: true,
+                toolbar: false,
+                paragraphize: false,
+                linebreaks: true
+            });
+        }
+
+        this.refreshControlPanel();
+        this.$controlPanel.addClass('active');
+        this.$save.show();
+        this.$cancel.show();
+        this.$edit.hide();
     }
 
     EditMe.prototype.hideControlPanel = function() {
-        this.$controlPanel.removeClass('visible')
+        this.$controlPanel.removeClass('visible');
     }
 
     EditMe.prototype.refreshControlPanel = function() {
-        if (!this.$controlPanel.hasClass('visible'))
-            this.showControlPanel()
+        if (!this.$controlPanel.hasClass('visible')) {
+            this.showControlPanel();
+        }
 
         this.$controlPanel
             .width(this.$el.outerWidth())
@@ -101,13 +136,14 @@
             .css({
                 top: this.$el.offset().top,
                 left: this.$el.offset().left + this.$el.outerWidth() - this.$controlPanel.outerWidth()
-            })
+            });
     }
 
     EditMe.prototype.showControlPanel = function() {
-        this.$controlPanel.addClass('visible')
-        if (!this.$controlPanel.hasClass('active'))
-            this.refreshControlPanel()
+        this.$controlPanel.addClass('visible');
+        if (!this.$controlPanel.hasClass('active')) {
+            this.refreshControlPanel();
+        }
     }
 
     // EDITME PLUGIN DEFINITION

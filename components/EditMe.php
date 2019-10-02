@@ -5,6 +5,8 @@ use Cms\Classes\ComponentBase;
 use RainLab\Translate\Classes\Translator;
 use RainLab\Translate\Models\Message;
 use System\Helpers\Cache as CacheHelper;
+use Url;
+use Backend;
 
 class EditMe extends ComponentBase
 {
@@ -13,6 +15,10 @@ class EditMe extends ComponentBase
     public $message;
     public $model_class;
     public $model_id;
+    public $ace_vendor_path;
+    public $type;
+    public $upload_url;
+    public $csrf_token;
 
     public function componentDetails()
     {
@@ -41,14 +47,28 @@ class EditMe extends ComponentBase
             $this->addCss('assets/vendor/redactor/redactor.css');
             $this->addJs('assets/vendor/redactor/redactor.js');
 
-            $this->addCss('assets/css/editme.css');
-            $this->addJs('assets/js/editme.js?v=1.0.2');
+            $this->addJs('/modules/system/assets/ui/js/foundation.baseclass.js');
+            $this->addJs('/modules/system/assets/ui/js/foundation.controlutils.js');
+            $this->addCss('/modules/backend/formwidgets/richeditor/assets/css/richeditor.css', 'core');
+            $this->addJs('/modules/backend/formwidgets/richeditor/assets/js/build-min.js', 'core');
+            $this->addJs('/modules/backend/formwidgets/richeditor/assets/js/build-plugins-min.js', 'core');
+            $this->addJs('/modules/backend/formwidgets/codeeditor/assets/js/build-min.js', 'core');
+
+            $this->addCss('assets/css/editme.css?v=1.0.3');
+            $this->addJs('assets/js/editme.js?v=1.0.3');
+
+            $this->ace_vendor_path = Url::asset('/modules/backend/formwidgets/codeeditor/assets/vendor/ace');
+            $this->upload_url = Backend::url('fw/editme/upload/upload');
+
+            $this->csrf_token = csrf_token();
         }
     }
 
     public function onRender()
     {
         $this->message = $this->property('message');
+        $this->type = $this->property('type');
+        $this->setProperty('type', '');
 
         if ($this->property('model')) {
             $model = $this->property('model');
@@ -57,17 +77,20 @@ class EditMe extends ComponentBase
             //reset optional model property, if we don't do this and the next component in template doesn't set it, it won't be empty!
             $this->setProperty('model', '');
         } else {
+            //TODO: check if message already exists in db, and if not, load default message from theme config files if it exists
             $content = Message::trans($this->message);
         }
 
-        //replace paragraphs with break lines
-        $content = str_replace(array('<p>','</p>'),array('','<br />'), $content);
-        //remove all html tags except break lines
-        $content = strip_tags($content, '<br>');
-        //remove EOL
-        $content = preg_replace( "/\r|\n/", "", $content);
-        //remove excess <br> or <br /> from the end of the text
-        $content = preg_replace('#(( ){0,}<br( {0,})(/{0,1})>){1,}$#i', '', $content);
+        if ($this->type != 'richeditor') {
+            //replace paragraphs with break lines
+            $content = str_replace(array('<p>','</p>'),array('','<br />'), $content);
+            //remove all html tags except break lines
+            $content = strip_tags($content, '<br>');
+            //remove EOL
+            $content = preg_replace( "/\r|\n/", "", $content);
+            //remove excess <br> or <br /> from the end of the text
+            $content = preg_replace('#(( ){0,}<br( {0,})(/{0,1})>){1,}$#i', '', $content);
+        }
 
         if (!$this->isEditor)
             return $content;
@@ -86,11 +109,14 @@ class EditMe extends ComponentBase
 
     public function onSave()
     {
-        if (!$this->checkEditor())
+        if (!$this->checkEditor()) {
             return;
+        }
+
+        $locale = Translator::instance()->getLocale();
+
         $key = post('message');
         $content = post('content');
-        $locale = Translator::instance()->getLocale();
 
         if (post('model')) {
             $modelClass = post('model')['model'];

@@ -56,3 +56,52 @@
 .control-editme button.editme-cancel-button:hover {
   background-position: 100% 0;
 }
+
+#linkPageLinks-1 {
+  display:none;
+}
+
+.fr-toolbar {
+  font-size: 15px;
+}
+
+.fr-toolbar .icon-paragraph:before {content:"\f1dd"}
+.fr-toolbar .icon-magic:before,
+.fr-popup .icon-magic:before {content:"\f0d0"}
+.fr-toolbar .icon-quote-left:before {content:"\f10d"}
+.fr-toolbar .icon-bold:before {content:"\f032"}
+.fr-toolbar .icon-italic:before {content:"\f033"}
+.fr-toolbar .icon-align-left:before,
+.fr-popup .icon-align-left:before {content:"\f036"}
+.fr-toolbar .icon-align-center:before,
+.fr-popup .icon-align-center:before {content:"\f037"}
+.fr-toolbar .icon-align-right:before,
+.fr-popup .icon-align-right:before {content:"\f038"}
+.fr-toolbar .icon-align-justify:before,
+.fr-popup .icon-align-justify:before {content:"\f039"}
+.fr-toolbar .icon-list-ul:before {content:"\f0ca"}
+.fr-toolbar .icon-list-ol:before {content:"\f0cb"}
+.fr-toolbar .icon-table:before {content:"\f0ce"}
+.fr-toolbar .icon-link:before,
+.fr-popup .icon-link:before {content:"\f0c1"}
+.fr-toolbar .icon-image:before {content:"\f03e"}
+.fr-toolbar .icon-upload:before {content:"\f093"}
+.fr-toolbar .icon-video-camera:before {content:"\f03d"}
+.fr-toolbar .icon-volume-up:before {content:"\f028"}
+.fr-toolbar .icon-file-o:before {content:"\f016"}
+.fr-toolbar .icon-minus:before {content:"\f068"}
+.fr-toolbar .icon-expand:before {content:"\f065"}
+.fr-toolbar .icon-code:before {content:"\f121"}
+.fr-popup .icon-exchange:before {content:"\f0ec"}
+.fr-popup .icon-commenting:before {content:"\f27a"}
+.fr-popup .icon-trash:before {content:"\f1f8"}
+.fr-popup .icon-star:before {content:"\f005"}
+.fr-popup .icon-info:before {content:"\f129"}
+.fr-popup .icon-arrows-alt:before {content:"\f0b2"}
+.fr-popup .icon-external-link:before {content:"\f14c"}
+.fr-popup .icon-edit:before {content:"\f044"}
+.fr-popup .icon-unlink:before {content:"\f127"}
+
+@font-face {font-family:'FontAwesome';src:url('font/fontawesome-webfont.eot?v=1.0.1');src:url('font/fontawesome-webfont.eot?#iefix&v=1.0.1') format('embedded-opentype'),url('font/fontawesome-webfont.woff?v=1.0.1') format('woff'),url('font/fontawesome-webfont.ttf?v=1.0.1') format('truetype'),url('font/fontawesome-webfont.svg#fontawesomeregular?v=1.0.1') format('svg');font-weight:normal;font-style:normal}
+[class^="icon-"] {font-family:FontAwesome;font-weight:normal;font-style:normal;text-decoration:inherit;-webkit-font-smoothing:antialiased;*margin-right:.3em;display:inline;width:auto;height:auto;line-height:normal;vertical-align:baseline;background-image:none;background-position:0% 0%;background-repeat:repeat;margin-top:0}
+[class^="icon-"]:before {text-decoration:inherit;display:inline-block;speak:none}

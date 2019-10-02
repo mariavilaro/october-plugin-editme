@@ -1,8 +1,29 @@
+{% if __SELF__.type == 'richeditor' %}
+<div
+    data-control="editme"
+    data-type="richeditor"
+    data-handler="{{ __SELF__ }}::onSave"
+    data-message="{{ __SELF__.message }}"
+    data-model="{{ __SELF__.model_class }}"
+    data-id="{{ __SELF__.model_id }}"
+    data-upload-url="{{ __SELF__.upload_url }}"
+    data-csrf-token="{{ __SELF__.csrf_token }}">
+    <div class="rendered">{{ __SELF__.content|raw }}</div>
+    <div
+        class="editme-richeditor"
+        data-links-handler="{{ __SELF__ }}::onLoadPageLinksForm"
+        data-ace-vendor-path="{{ __SELF__.ace_vendor_path }}">
+        <textarea style="display:none">{{ __SELF__.content }}</textarea>
+    </div>
+</div>
+{% else %}
 <span
     data-control="editme"
+    data-type="plain"
     data-handler="{{ __SELF__ }}::onSave"
     data-message="{{ __SELF__.message }}"
     data-model="{{ __SELF__.model_class }}"
     data-id="{{ __SELF__.model_id }}">
     {{ __SELF__.content|raw }}
 </span>
+{% endif %}

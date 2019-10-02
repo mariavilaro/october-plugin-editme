@@ -6,7 +6,7 @@ It needs the Rainlab.Translate plugin to work.
 
 This plugin uses Rainlab.Editable plugin code as a base but uses translate strings instead of content blocks, so everything is saved in the database.
 
-The editor only allows plain text and line breaks.
+The editor has two modes: simple (only plain text and line breaks) and html (wysiwyg editor, it uses the same editor as in the backend).
 
 Implementation is simply replacing the `{{ message|_ }}` translation tags with the component.
 
@@ -26,6 +26,11 @@ url = "/a-page"
 <!-- This content will be editable -->
 {% component 'editme' message='page.title' %}
 ```
+
+For making the editable text html you only need to set the `type='richeditor'` attribute:
+
+    {% component 'editme' message='page.description' type='richeditor' %}
+
 
 ## Replacing existing translation tags with editable tags.
 
