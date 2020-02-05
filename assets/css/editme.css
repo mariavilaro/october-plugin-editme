@@ -29,10 +29,14 @@
   line-height: 0;
   overflow: hidden;
   border-radius: 1px;
+  position: absolute;
 }
 .control-editme button.editme-edit-button {
   background-color: transparent;
   background-image: url('../images/edit-icon.png');
+  top: -30px;
+  right: 0px;
+  position: absolute;
 }
 .control-editme button.editme-edit-button:hover {
   background-position: 100% 0;
@@ -40,18 +44,20 @@
 .control-editme button.editme-save-button,
 .control-editme button.editme-cancel-button {
   height: 26px;
-  background-color: #f0f0f0;
   margin: 4px 2px;
 }
 .control-editme button.editme-save-button {
   background-image: url('../images/save-icon.png');
+  top: -38px;
+  right: -28px;
 }
 .control-editme button.editme-save-button:hover {
   background-position: 100% 0;
 }
 .control-editme button.editme-cancel-button {
-  margin-right: 4px;
   background-image: url('../images/cancel-icon.png');
+  top: -38px;
+  right: 0px;
 }
 .control-editme button.editme-cancel-button:hover {
   background-position: 100% 0;
@@ -63,6 +69,10 @@
 
 .fr-toolbar {
   font-size: 15px;
+}
+
+.fr-toolbar.fr-top {
+  position: sticky;
 }
 
 .fr-toolbar .icon-paragraph:before {content:"\f1dd"}
@@ -102,6 +112,28 @@
 .fr-popup .icon-edit:before {content:"\f044"}
 .fr-popup .icon-unlink:before {content:"\f127"}
 
-@font-face {font-family:'FontAwesome';src:url('font/fontawesome-webfont.eot?v=1.0.1');src:url('font/fontawesome-webfont.eot?#iefix&v=1.0.1') format('embedded-opentype'),url('font/fontawesome-webfont.woff?v=1.0.1') format('woff'),url('font/fontawesome-webfont.ttf?v=1.0.1') format('truetype'),url('font/fontawesome-webfont.svg#fontawesomeregular?v=1.0.1') format('svg');font-weight:normal;font-style:normal}
-[class^="icon-"] {font-family:FontAwesome;font-weight:normal;font-style:normal;text-decoration:inherit;-webkit-font-smoothing:antialiased;*margin-right:.3em;display:inline;width:auto;height:auto;line-height:normal;vertical-align:baseline;background-image:none;background-position:0% 0%;background-repeat:repeat;margin-top:0}
-[class^="icon-"]:before {text-decoration:inherit;display:inline-block;speak:none}
+@font-face {
+  font-family:'FontAwesome';
+  src: url('font/fontawesome-webfont.eot?v=1.0.1');
+  src: url('font/fontawesome-webfont.eot?#iefix&v=1.0.1') format('embedded-opentype'),url('font/fontawesome-webfont.woff?v=1.0.1') format('woff'),url('font/fontawesome-webfont.ttf?v=1.0.1') format('truetype'),url('font/fontawesome-webfont.svg#fontawesomeregular?v=1.0.1') format('svg');font-weight:normal;font-style:normal}
+
+.control-richeditor [class^="icon-"]:before {
+  font-family:FontAwesome;
+  font-weight:normal;
+  font-style:normal;
+  text-decoration:inherit;
+  -webkit-font-smoothing:antialiased;
+  *margin-right:.3em;
+  display:inline;
+  width:auto;
+  height:auto;
+  line-height:normal;
+  vertical-align:baseline;
+  background-image:none;
+  background-position:0% 0%;
+  background-repeat:repeat;
+  margin-top:0;
+  text-decoration:inherit;
+  display:inline-block;
+  speak:none
+}
