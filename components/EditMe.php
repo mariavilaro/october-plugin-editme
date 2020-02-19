@@ -54,8 +54,8 @@ class EditMe extends ComponentBase
             $this->addJs('/modules/backend/formwidgets/richeditor/assets/js/build-plugins-min.js', 'core');
             $this->addJs('/modules/backend/formwidgets/codeeditor/assets/js/build-min.js', 'core');
 
-            $this->addCss('assets/css/editme.css?v=1.0.3');
-            $this->addJs('assets/js/editme.js?v=1.0.3');
+            $this->addCss('assets/css/editme.css?v=1.0.5');
+            $this->addJs('assets/js/editme.js?v=1.0.5');
 
             $this->ace_vendor_path = Url::asset('/modules/backend/formwidgets/codeeditor/assets/vendor/ace');
             $this->upload_url = Backend::url('fw/editme/upload/upload');

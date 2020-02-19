@@ -96,6 +96,11 @@
             this.originalHtml = this.$el.find('>.rendered').html();
 
             this.richEditor = this.$el.find('>.editme-richeditor:first').richEditor();
+            this.richEditor.data('oc.richEditor').editor.opts.fileUploadURL = this.uploadUrl;
+            this.richEditor.data('oc.richEditor').editor.opts.fileUploadParams = {
+                X_OCTOBER_MEDIA_MANAGER_QUICK_UPLOAD: 1,
+                _token: this.csrfToken
+            };
             this.richEditor.data('oc.richEditor').editor.opts.imageUploadURL = this.uploadUrl;
             this.richEditor.data('oc.richEditor').editor.opts.imageUploadParams = {
                 X_OCTOBER_MEDIA_MANAGER_QUICK_UPLOAD: 1,
