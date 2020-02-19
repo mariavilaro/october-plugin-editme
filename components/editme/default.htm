@@ -11,6 +11,7 @@
     <div class="rendered">{{ __SELF__.content|raw }}</div>
     <div
         class="editme-richeditor"
+        {% if __SELF__.toolbarButtons %}data-toolbar-buttons="{{ __SELF__.toolbarButtons }}"{% endif %}
         data-links-handler="{{ __SELF__ }}::onLoadPageLinksForm"
         data-ace-vendor-path="{{ __SELF__.ace_vendor_path }}">
         <textarea style="display:none">{{ __SELF__.content }}</textarea>

@@ -1,0 +1,11 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    froala_custom_defaults:
+        label: fw.editme::lang.settings.froala_custom_defaults
+        commentAbove: fw.editme::lang.settings.froala_custom_defaults_comment
+        type: codeeditor
+        size: giant
+        language: js

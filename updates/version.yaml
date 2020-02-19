@@ -3,3 +3,4 @@
 1.0.3: Fix permissions
 1.0.4: Allow editing of html texts (WYSIWYG)
 1.0.5: Fix wysiwyg editor styles, fix file upload
+1.0.6: Allow to change the toolbar buttons and advanced richeditor custom defaults

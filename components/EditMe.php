@@ -7,6 +7,7 @@ use RainLab\Translate\Models\Message;
 use System\Helpers\Cache as CacheHelper;
 use Url;
 use Backend;
+use Fw\EditMe\Models\Settings;
 
 class EditMe extends ComponentBase
 {
@@ -17,6 +18,7 @@ class EditMe extends ComponentBase
     public $model_id;
     public $ace_vendor_path;
     public $type;
+    public $toolbarButtons;
     public $upload_url;
     public $csrf_token;
 
@@ -54,8 +56,13 @@ class EditMe extends ComponentBase
             $this->addJs('/modules/backend/formwidgets/richeditor/assets/js/build-plugins-min.js', 'core');
             $this->addJs('/modules/backend/formwidgets/codeeditor/assets/js/build-min.js', 'core');
 
-            $this->addCss('assets/css/editme.css?v=1.0.5');
-            $this->addJs('assets/js/editme.js?v=1.0.5');
+            $froala_custom_defaults = Settings::get('froala_custom_defaults_file');
+            if ($froala_custom_defaults) {
+                $this->addJs('/storage/app/media/fw_editme/'.$froala_custom_defaults);
+            }
+
+            $this->addCss('assets/css/editme.css?v=1.0.6');
+            $this->addJs('assets/js/editme.js?v=1.0.6');
 
             $this->ace_vendor_path = Url::asset('/modules/backend/formwidgets/codeeditor/assets/vendor/ace');
             $this->upload_url = Backend::url('fw/editme/upload/upload');
@@ -68,7 +75,9 @@ class EditMe extends ComponentBase
     {
         $this->message = $this->property('message');
         $this->type = $this->property('type');
+        $this->toolbarButtons = $this->property('toolbarButtons');
         $this->setProperty('type', '');
+        $this->setProperty('toolbarButtons', '');
 
         if ($this->property('model')) {
             $model = $this->property('model');
