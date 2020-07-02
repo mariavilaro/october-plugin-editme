@@ -61,8 +61,8 @@ class EditMe extends ComponentBase
                 $this->addJs('/storage/app/media/fw_editme/'.$froala_custom_defaults);
             }
 
-            $this->addCss('assets/css/editme.css?v=1.0.6');
-            $this->addJs('assets/js/editme.js?v=1.0.6');
+            $this->addCss('assets/css/editme.css?v=1.0.7');
+            $this->addJs('assets/js/editme.js?v=1.0.7');
 
             $this->ace_vendor_path = Url::asset('/modules/backend/formwidgets/codeeditor/assets/vendor/ace');
             $this->upload_url = Backend::url('fw/editme/upload/upload');
