@@ -17,7 +17,7 @@
         this.richEditor = null;
         this.requestHandler = this.$el.data('handler');
         this.editorType = this.$el.data('type');
-        this.uploadUrl = this.$el.data('upload-url');
+        this.uploadHandler = this.$el.data('upload-handler');
         this.csrfToken = this.$el.data('csrf-token');
         this.editMessage = this.$el.data('message');
         if (this.$el.data('model') && this.$el.data('id')) {
@@ -96,15 +96,19 @@
             this.originalHtml = this.$el.find('>.rendered').html();
 
             this.richEditor = this.$el.find('>.editme-richeditor:first').richEditor();
-            this.richEditor.data('oc.richEditor').editor.opts.fileUploadURL = this.uploadUrl;
-            this.richEditor.data('oc.richEditor').editor.opts.fileUploadParams = {
-                X_OCTOBER_MEDIA_MANAGER_QUICK_UPLOAD: 1,
-                _token: this.csrfToken
-            };
-            this.richEditor.data('oc.richEditor').editor.opts.imageUploadURL = this.uploadUrl;
-            this.richEditor.data('oc.richEditor').editor.opts.imageUploadParams = {
-                X_OCTOBER_MEDIA_MANAGER_QUICK_UPLOAD: 1,
-                _token: this.csrfToken
+
+            var richEditorOpts = this.richEditor.data('oc.richEditor').editor.opts;
+
+            // Ensure that October recognizes AJAX requests from Froala
+            richEditorOpts.requestHeaders = {
+                'X-CSRF-TOKEN': this.csrfToken,
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+
+            richEditorOpts.imageUploadURL = richEditorOpts.fileUploadURL = window.location;
+            richEditorOpts.imageUploadParam = richEditorOpts.fileUploadParam = 'file_data';
+            richEditorOpts.imageUploadParams = richEditorOpts.fileUploadParams = {
+                _handler: this.uploadHandler
             };
 
             this.$el.find('>.rendered').hide();

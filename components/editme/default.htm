@@ -6,7 +6,7 @@
     data-message="{{ __SELF__.message }}"
     data-model="{{ __SELF__.model_class }}"
     data-id="{{ __SELF__.model_id }}"
-    data-upload-url="{{ __SELF__.upload_url }}"
+    data-upload-handler="{{ __SELF__ }}::onUpload"
     data-csrf-token="{{ __SELF__.csrf_token }}">
     <div class="rendered">{{ __SELF__.content|raw }}</div>
     <div

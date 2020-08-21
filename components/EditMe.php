@@ -11,6 +11,8 @@ use Fw\EditMe\Models\Settings;
 
 class EditMe extends ComponentBase
 {
+    use \Backend\Traits\UploadableWidget;
+
     public $content;
     public $isEditor;
     public $message;
@@ -19,7 +21,6 @@ class EditMe extends ComponentBase
     public $ace_vendor_path;
     public $type;
     public $toolbarButtons;
-    public $upload_url;
     public $csrf_token;
 
     public function componentDetails()
@@ -61,11 +62,10 @@ class EditMe extends ComponentBase
                 $this->addJs('/storage/app/media/fw_editme/'.$froala_custom_defaults);
             }
 
-            $this->addCss('assets/css/editme.css?v=1.0.7');
-            $this->addJs('assets/js/editme.js?v=1.0.7');
+            $this->addCss('assets/css/editme.css?v=1.0.8');
+            $this->addJs('assets/js/editme.js?v=1.0.8');
 
             $this->ace_vendor_path = Url::asset('/modules/backend/formwidgets/codeeditor/assets/vendor/ace');
-            $this->upload_url = Backend::url('fw/editme/upload/upload');
 
             $this->csrf_token = csrf_token();
         }
