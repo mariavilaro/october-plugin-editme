@@ -73,6 +73,7 @@ class EditMe extends ComponentBase
 
     public function onRender()
     {
+        $this->isEditor = $this->checkEditor();
         $this->message = $this->property('message');
         $this->type = $this->property('type');
         $this->toolbarButtons = $this->property('toolbarButtons');
