@@ -104,6 +104,10 @@ class EditMe extends ComponentBase
         if (!$this->isEditor)
             return $content;
 
+        if (!$content) {
+            $content = "[empty]";
+        }
+
         $this->content = $content;
 
         if (isset($model)) {
