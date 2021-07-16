@@ -8,6 +8,7 @@ use System\Helpers\Cache as CacheHelper;
 use Url;
 use Backend;
 use Fw\EditMe\Models\Settings;
+use Backend\Models\EditorSetting;
 
 class EditMe extends ComponentBase
 {
@@ -21,6 +22,7 @@ class EditMe extends ComponentBase
     public $ace_vendor_path;
     public $type;
     public $toolbarButtons;
+    public $paragraphFormats;
     public $csrf_token;
 
     public function componentDetails()
@@ -61,6 +63,8 @@ class EditMe extends ComponentBase
             if ($froala_custom_defaults) {
                 $this->addJs('/storage/app/media/fw_editme/'.$froala_custom_defaults);
             }
+
+            $this->paragraphFormats = EditorSetting::getConfiguredFormats('html_paragraph_formats') ? json_encode(EditorSetting::getConfiguredFormats('html_paragraph_formats')) : null;
 
             $this->addCss('assets/css/editme.css?v=1.0.8');
             $this->addJs('assets/js/editme.js?v=1.0.8');

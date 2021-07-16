@@ -83,7 +83,7 @@ paragraphFormat,paragraphStyle,quote,bold,italic,align,formatOL,formatUL,insertT
 
 If you need to modify some advanced richeditor default options, you can do it from the System Settings, under "Editor advanced settings". After saving, all richeditor fields (both on the backend and on the frontend) will initialize with these default options. You can check the [available options](https://froala.com/wysiwyg-editor/docs/options/).
 
-With the included example code you would be able to disable advanced list options, remove the possibility to add H1 headers and add H6 headers to the paragraphFormat options:
+With the included example code you would be able to disable advanced list options:
 
 ```javascript
 +function ($) { "use strict";
@@ -91,7 +91,6 @@ With the included example code you would be able to disable advanced list option
     if ($.FroalaEditor) {
       $.FroalaEditor.DEFAULTS = $.extend($.FroalaEditor.DEFAULTS, {
         listAdvancedTypes: false,
-        paragraphFormat:{N:"Normal",H2:"Heading 2",H3:"Heading 3",H4:"Heading 4",H5:"Heading 5",H6:"Heading 6",PRE:"Code"},
       });
     }        
   })
