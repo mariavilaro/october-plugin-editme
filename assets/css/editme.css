@@ -1,3 +1,6 @@
+.redactor-box {
+  display: inherit;
+}
 .control-editme {
   display: none;
   position: absolute;
